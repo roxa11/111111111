@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityFlow Semey - Offline Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Tektur:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="brand-mark">SF</div>
+                <div>
+                    <p class="brand-title">CityFlow Semey</p>
+                    <p class="brand-subtitle">Локальный режим (Без БД)</p>
+                </div>
+            </div>
+            <div class="topbar-controls">
+                <span id="connection-badge" class="ok">База: LocalStorage</span>
+                <span id="user-chip" class="user-chip hidden"></span>
+                <button id="btn-logout" class="btn btn-secondary hidden">Выйти</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="view-login" class="auth-card">
+            <h2>Вход в систему</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>ИИН (12 цифр)</label>
+                    <input type="text" id="login-iin" placeholder="123456789012" required maxlength="12">
+                </div>
+                <div class="form-group">
+                    <label>ФИО</label>
+                    <input type="text" id="login-name" placeholder="Введите имя" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Войти</button>
+            </form>
+            <p class="hint">Демо: админ - 999999999999, подрядчик - 222222222222</p>
+        </section>
+
+        <section id="view-citizen" class="role-view hidden">
+            <div class="panel">
+                <h3>Создать заявку</h3>
+                <form id="citizen-form">
+                    <input type="text" id="req-address" placeholder="Адрес" required>
+                    <select id="req-category">
+                        <option value="roads">Дороги</option>
+                        <option value="lights">Освещение</option>
+                    </select>
+                    <textarea id="req-description" placeholder="Описание проблемы"></textarea>
+                    <input type="file" id="req-photo" accept="image/*">
+                    <input type="hidden" id="req-lat" value="50.4111">
+                    <input type="hidden" id="req-lng" value="80.2274">
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+            <div class="panel">
+                <h3>Мои заявки</h3>
+                <div id="citizen-list" class="feed"></div>
+            </div>
+        </section>
+
+        <section id="view-admin" class="role-view hidden">
+            <div class="panel">
+                <h3>Все обращения</h3>
+                <div id="admin-feed" class="feed"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
